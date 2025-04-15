@@ -1,22 +1,24 @@
 /* ASSIGNMENT 1 */
 /* SECTION 2 */
 
-
 --SELECT
 /* 1. Write a query that returns everything in the customer table. */
 
 SELECT * FROM customer
+;
 
 /* 2. Write a query that displays all of the columns and 10 rows from the cus- tomer table, 
 sorted by customer_last_name, then customer_first_ name. */
 
 SELECT * FROM customer ORDER BY customer_last_name ASC, customer_last_name DESC LIMIT 10
+;
 
 --WHERE
 /* 1. Write a query that returns all customer purchases of product IDs 4 and 9. */
 -- option 1
 
 SELECT * FROM customer_purchases WHERE product_id IN (4,9)
+;
 
 -- option 2
 
@@ -37,7 +39,7 @@ FROM
 	customer_purchases AS c
 WHERE
 	vendor_id BETWEEN 8 AND 10
-
+;
 
 --CASE
 /* 1. Products can be sold by the individual unit or by bulk measures like lbs. or oz. 
@@ -53,6 +55,7 @@ SELECT
 		ELSE 'unit' END AS product_qty_type
 FROM
 	product
+;
 
 /* 2. We want to flag all of the different types of pepper products that are sold at the market. 
 add a column to the previous query called pepper_flag that outputs a 1 if the product_name 
@@ -69,9 +72,9 @@ SELECT
 		WHEN LOWER(product_name) LIKE '%pepper%' THEN 1
 		ELSE 0
 	END AS pepper_flag
-	
 FROM
 	product
+;
 
 --JOIN
 /* 1. Write a query that INNER JOINs the vendor table to the vendor_booth_assignments table on the 
@@ -87,7 +90,7 @@ INNER JOIN vendor_booth_assignments AS B
 ON A.vendor_id = B.vendor_id
 
 ORDER BY A.vendor_name ASC, B.market_date ASC
-
+;
 
 /* SECTION 3 */
 
@@ -101,7 +104,7 @@ SELECT
 FROM
 	vendor_booth_assignments
 GROUP BY vendor_id
-
+;
 
 /* 2. The Farmer’s Market Customer Appreciation Committee wants to give a bumper 
 sticker to everyone who has ever spent more than $2000 at the market. Write a query that generates a list 
@@ -120,7 +123,7 @@ ON p.customer_id = c.customer_id
 GROUP BY 1,2,3
 HAVING SUM(p.quantity * p.cost_to_customer_per_qty) > 2000
 ORDER BY c.customer_last_name, c.customer_first_name
-
+;
 
 --Temp Table
 /* 1. Insert the original vendor table into a temp.new_vendor and then add a 10th vendor: 
@@ -140,7 +143,7 @@ SELECT * FROM vendor
 
 INSERT INTO temp.new_vendor (vendor_id,vendor_name,vendor_type,vendor_owner_first_name,vendor_owner_last_name)
 VALUES(10,'Thomass Superfood Store','Fresh Focused','Thomas','Rosenthal')
-
+;
 
 -- Date
 /*1. Get the customer_id, month, and year (in separate columns) of every purchase in the customer_purchases table.
@@ -154,6 +157,7 @@ SELECT
 	CAST(SUBSTRING(market_date,0,5) AS INT) AS year
 FROM
 	customer_purchases
+;
 
 /* 2. Using the previous query as a base, determine how much money each customer spent in April 2022. 
 Remember that money spent is quantity*cost_to_customer_per_qty. 
@@ -170,3 +174,4 @@ WHERE
 	CAST(SUBSTRING(market_date,7,9) AS INT) = 4
 AND CAST(SUBSTRING(market_date,0,5) AS INT) = 2022
 GROUP BY 1
+;
