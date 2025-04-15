@@ -10,7 +10,7 @@ SELECT * FROM customer
 /* 2. Write a query that displays all of the columns and 10 rows from the cus- tomer table, 
 sorted by customer_last_name, then customer_first_ name. */
 
-SELECT * FROM customer ORDER BY customer_last_name ASC, customer_last_name DESC LIMIT 10
+SELECT * FROM customer ORDER BY customer_last_name ASC, customer_first_name ASC LIMIT 10
 ;
 
 --WHERE
