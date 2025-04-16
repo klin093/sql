@@ -183,7 +183,14 @@ VALUES(col1,col2,col3,col4,col5)
 */
 
 CREATE TEMP TABLE temp.new_vendor AS 
-SELECT * FROM vendor
+SELECT
+	vendor_id,
+	vendor_name,
+	vendor_type,
+	vendor_owner_first_name,
+	vendor_owner_last_name
+FROM
+	vendor
 ;
 
 INSERT INTO temp.new_vendor (vendor_id,vendor_name,vendor_type,vendor_owner_first_name,vendor_owner_last_name)
